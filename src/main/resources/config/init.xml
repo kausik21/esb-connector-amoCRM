@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+   Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+
+   WSO2 Inc. licenses this file to you under the Apache License,
+   Version 2.0 (the "License"); you may not use this file except
+   in compliance with the License.
+   You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing,
+   software distributed under the License is distributed on an
+   "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+   KIND, either express or implied. See the License for the
+   specific language governing permissions and limitations
+   under the License.
+-->
+<template name="init" xmlns="http://ws.apache.org/ns/synapse">
+<parameter name="amoCRMapiUrl" description="The URL of the amoCrm API"/>
+<parameter name="amoCRMapiKey" description="The API Key for the amoCrm account."/>
+<parameter name="amoCRMapiVersion" description="The amoCrm request version."/>
+	<!--&lt;!&ndash;<parameter name="username" description="User's name"/>&ndash;&gt;-->
+	<parameter name="email" description="User's email"/>
+
+<sequence>
+	<property name="uri.var.amoCRMapiUrl" expression="$func:amoCRMapiUrl"/>
+	<property name="uri.var.amoCRMapiKey" expression="$func:amoCRMapiKey"/>
+	<property name="uri.var.amoCRMapiVersion" expression="$func:amoCRMapiVersion"/>
+	<!--<property name="uri.var.username" expression="$func:username"/>-->
+	<property name="uri.var.email" expression="$func:email"/>
+
+	<property name="uri.var.auth" expression="fn:concat('? ', 'USER_HASH=',get-property('uri.var.amoCRMapiKey'), '&amp;USER_LOGIN=',get-property('uri.var.email'))"/>
+
+</sequence>
+
+</template>
